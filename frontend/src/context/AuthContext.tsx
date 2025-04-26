@@ -7,10 +7,20 @@ export interface User {
   email: string;
 }
 
+export interface RegisterPayload {
+  lssId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  phone: string;
+  heardAbout?: string;
+}
+
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (name: string, email: string, password: string) => Promise<void>;
+  register: (payload: RegisterPayload) => Promise<void>;
   logout: () => void;
   loading: boolean;
 }
@@ -43,8 +53,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(data.user);
   };
 
-  const register = async (name: string, email: string, password: string) => {
-    const { data } = await client.post<{ token: string; user: User }>('/auth/register', { name, email, password });
+  const register = async (payload: RegisterPayload) => {
+    const { data } = await client.post<{ token: string; user: User }>('/auth/register', payload);
     localStorage.setItem('mm_token', data.token);
     setUser(data.user);
   };

@@ -14,6 +14,7 @@ import MentorsPage from "./pages/MentorPage";
 import MentorDetailPage from "./pages/MentorDetailPage";
 import ProfilePage from "./pages/ProfilePage";
 import BookingsPage from "./pages/BookingsPage";
+import SearchMentorsPage from "./pages/SearchMentorsPage";
 
 /** Protect routes that require a logged-in user */
 const PrivateRoute: React.FC<{ children: React.ReactElement }> = ({ children }) => {
@@ -35,6 +36,7 @@ const App: React.FC = () => (
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/search" element={<PrivateRoute><SearchMentorsPage /></PrivateRoute>} />
 
         <Route path="/mentors" element={<MentorsPage />} />
         <Route path="/mentors/:id" element={<MentorDetailPage />} />
