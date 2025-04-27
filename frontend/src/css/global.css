@@ -45,12 +45,13 @@ button:hover {
 input[type='text'],
 input[type='email'],
 input[type='password'] {
-  padding: 0.9rem 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   background: #fafbfc;
   transition: border 0.2s;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 input:focus {
@@ -72,16 +73,12 @@ input[type="tel"] {
 }
 
 .auth-form {
-  max-width: 400px;
-  margin: 3rem auto;
-  padding: 2.5rem 2rem 2rem 2rem;
   background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 6px 24px rgba(34,34,34,0.13), 0 1.5px 4px rgba(34,34,34,0.07);
-  border: 1px solid #f0f0f0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .auth-form h1 {

@@ -9,10 +9,17 @@ const SALT_ROUNDS = 10;
 
 /** Generate a signed JWT */
 function signToken(userId: string, email: string) {
-  const secret = config.jwt.secret as jwt.Secret; // cast to satisfy typings
-  return jwt.sign({ sub: userId, email }, secret, {
-    expiresIn: config.jwt.expiresIn,
-  });
+  const secret = String(config.jwt.secret);
+  const expiresIn = String(config.jwt.expiresIn);
+  if (!secret || secret === 'your-very-secure-secret-key') {
+    throw new Error('JWT_SECRET is not set! Please set it in your .env file for production.');
+  }
+  // The third argument is the options object, where expiresIn is set
+  return jwt.sign(
+    { sub: userId, email },
+    secret,
+    { expiresIn }
+  );
 }
 
 /** POST /api/auth/signup  – create a new account */

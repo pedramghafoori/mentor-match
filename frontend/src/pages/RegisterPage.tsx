@@ -54,25 +54,30 @@ const RegisterPage: React.FC = () => {
         <div className="form-row">
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <label htmlFor="firstName">First Name</label>
-            <input id="firstName" type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} required />
+            <input id="firstName" type="text" value={firstName} onChange={e => setFirstName(e.target.value)} required />
           </div>
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <label htmlFor="lastName">Last Name</label>
-            <input id="lastName" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} required />
+            <input id="lastName" type="text" value={lastName} onChange={e => setLastName(e.target.value)} required />
           </div>
         </div>
         <label htmlFor="lssId">LSS ID</label>
-        <input id="lssId" type="text" placeholder="LSS ID" value={lssId} onChange={e => setLssId(e.target.value)} required />
+        <input id="lssId" type="text" value={lssId} onChange={e => setLssId(e.target.value)} required />
         <label htmlFor="email">Email</label>
-        <input id="email" type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
+        <input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} required />
         <label htmlFor="phone">Phone Number</label>
-        <input id="phone" type="tel" placeholder="Phone Number" value={phone} onChange={e => setPhone(e.target.value)} required style={{ appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'textfield' }} />
+        <input id="phone" type="tel" value={phone} onChange={e => setPhone(e.target.value)} required style={{ appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'textfield' }} />
         <label htmlFor="password">Password</label>
-        <input id="password" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required />
+        <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
         <label htmlFor="confirmPassword">Confirm Password</label>
-        <input id="confirmPassword" type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
-        <label htmlFor="heardAbout">Where did you hear about MentorConnect? (optional)</label>
-        <input id="heardAbout" type="text" placeholder="Where did you hear about MentorConnect? (optional)" value={heardAbout} onChange={e => setHeardAbout(e.target.value)} />
+        <input id="confirmPassword" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
+        <label>How did you hear about MentorConnect? (optional)</label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', marginBottom: '0.5rem' }}>
+          <label><input type="radio" name="heardAbout" value="word of mouth" checked={heardAbout === 'word of mouth'} onChange={e => setHeardAbout(e.target.value)} /> Word of mouth</label>
+          <label><input type="radio" name="heardAbout" value="My area chair" checked={heardAbout === 'My area chair'} onChange={e => setHeardAbout(e.target.value)} /> My area chair</label>
+          <label><input type="radio" name="heardAbout" value="Lifesaving Society" checked={heardAbout === 'Lifesaving Society'} onChange={e => setHeardAbout(e.target.value)} /> Lifesaving Society</label>
+          <label><input type="radio" name="heardAbout" value="My instructor" checked={heardAbout === 'My instructor'} onChange={e => setHeardAbout(e.target.value)} /> My instructor</label>
+        </div>
         {error && <p className="error">{error}</p>}
         <button type="submit">Register</button>
       </form>
