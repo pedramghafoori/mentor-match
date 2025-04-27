@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret, SignOptions } from 'jsonwebtoken';
 
 import { UserModel } from '../models/user.model';
 import { config } from '../config/config';
@@ -9,8 +9,8 @@ const SALT_ROUNDS = 10;
 
 /** Generate a signed JWT */
 function signToken(userId: string, email: string) {
-  const secret = String(config.jwt.secret);
-  const expiresIn = String(config.jwt.expiresIn);
+  const secret: Secret = config.jwt.secret;
+  const options: SignOptions = { expiresIn: config.jwt.expiresIn };
   if (!secret || secret === 'your-very-secure-secret-key') {
     throw new Error('JWT_SECRET is not set! Please set it in your .env file for production.');
   }
@@ -18,7 +18,7 @@ function signToken(userId: string, email: string) {
   return jwt.sign(
     { sub: userId, email },
     secret,
-    { expiresIn }
+    options
   );
 }
 

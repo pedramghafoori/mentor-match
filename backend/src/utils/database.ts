@@ -1,52 +1,66 @@
-import { Pool } from 'pg';
+import { Pool, PoolClient, QueryResult, QueryResultRow } from 'pg';
 import { config } from '../config/config';
 
 const pool = new Pool({
-  host: config.database.host,
-  port: config.database.port,
-  user: config.database.username,
+  host:     config.database.host,
+  port:     config.database.port,
+  user:     config.database.username,
   password: config.database.password,
   database: config.database.database,
 });
 
-export const query = async (text: string, params?: any[]) => {
+/** -------------------------------------------------------
+ *  Simple helper for one-off queries
+ * ------------------------------------------------------ */
+export const query = <T extends QueryResultRow = any>(
+  text: string,
+  params?: any[]
+): Promise<QueryResult<T>> => {
   const start = Date.now();
-  try {
-    const res = await pool.query(text, params);
+  return pool.query<T>(text, params).then((res) => {
     const duration = Date.now() - start;
     console.log('Executed query', { text, duration, rows: res.rowCount });
     return res;
-  } catch (error) {
-    console.error('Error executing query', { text, error });
-    throw error;
-  }
+  });
 };
 
-export const getClient = async () => {
-  const client = await pool.connect();
-  const query = client.query;
-  const release = client.release;
+/** -------------------------------------------------------
+ *  Borrow a client and track its last query (leak detector)
+ * ------------------------------------------------------ */
+interface DebugClient extends PoolClient {
+  lastQuery?: any[];
+}
 
-  // Set a timeout of 5 seconds
+export const getClient = async (): Promise<DebugClient> => {
+  const client = (await pool.connect()) as DebugClient;
+
+  const originalQuery   = client.query.bind(client);
+  const originalRelease = client.release.bind(client);
+
+  // warn if client is held >5 s
   const timeout = setTimeout(() => {
-    console.error('A client has been checked out for more than 5 seconds!');
-    console.error(`The last executed query on this client was: ${client.lastQuery}`);
-  }, 5000);
+    console.error(
+      'A client has been checked out for more than 5 seconds!',
+      '\nLast query:', client.lastQuery
+    );
+  }, 5_000);
 
-  // Monkey patch the query method to keep track of the last query executed
-  client.query = (...args: any[]) => {
+  // monkey‑patch query so we remember the last call but keep types happy
+  client.query = ((...args: any[]) => {
     client.lastQuery = args;
-    return query.apply(client, args);
-  };
+    // run the original query
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore – dynamic arg list matches one of the overloads at runtime
+    return originalQuery(...args);
+  }) as unknown as PoolClient['query'];
 
-  client.release = () => {
-    // Clear the timeout
+  // patch release so we clean up
+  client.release = (err?: Error) => {
     clearTimeout(timeout);
-    // Set the methods back to their original un-monkey-patched version
-    client.query = query;
-    client.release = release;
-    return release.apply(client);
+    client.query   = originalQuery as any;
+    client.release = originalRelease;
+    return originalRelease(err);
   };
 
   return client;
-}; 
+};

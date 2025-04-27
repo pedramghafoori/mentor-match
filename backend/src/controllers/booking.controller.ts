@@ -8,4 +8,5 @@ export const bookingController = {
   getBookings: (req: Request, res: Response) => {
     res.status(501).json({ message: 'Not implemented' });
   },
+  list: (_: Request, res: Response) => res.json([]),
 }; 
