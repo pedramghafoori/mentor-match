@@ -2,7 +2,7 @@
   "name": "mentor-match",
   "private": true,
   "scripts": {
-    "dev": "concurrently -k -n BACKEND,FRONTEND -c yellow,cyan \"cross-env PORT=${PORT:-5000} npm run dev --prefix backend\" \"cross-env REACT_APP_API_URL=http://localhost:${PORT:-5000}/api npm start --prefix frontend\"",
+    "dev": "concurrently -k -n BACKEND,FRONTEND -c yellow,cyan \"npm run dev --prefix backend\" \"npm start --prefix frontend\"",
     "dev:back": "npm run dev --prefix backend",
     "dev:front": "npm start --prefix frontend"
   },

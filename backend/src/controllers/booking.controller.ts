@@ -5,7 +5,16 @@ export const bookingController = {
   createBooking: (req: Request, res: Response) => {
     res.status(501).json({ message: 'Not implemented' });
   },
-  getBookings: (req: Request, res: Response) => {
+  getUserBookings: (req: Request, res: Response) => {
+    res.status(501).json({ message: 'Not implemented' });
+  },
+  getMentorBookings: (req: Request, res: Response) => {
+    res.status(501).json({ message: 'Not implemented' });
+  },
+  updateBooking: (req: Request, res: Response) => {
+    res.status(501).json({ message: 'Not implemented' });
+  },
+  cancelBooking: (req: Request, res: Response) => {
     res.status(501).json({ message: 'Not implemented' });
   },
   list: (_: Request, res: Response) => res.json([]),

@@ -8,7 +8,7 @@ dotenv.config();
 // JWT_EXPIRES_IN=24h
 
 export const config = {
-  port: process.env.PORT || 5000,
+  port: Number(process.env.PORT) || 5500,
   database: {
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT || '5432'),

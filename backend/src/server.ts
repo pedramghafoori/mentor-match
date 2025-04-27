@@ -22,7 +22,7 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/reviews', reviewRoutes);
 
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
@@ -35,8 +35,8 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   });
 });
 
-const PORT = config.port;
-
+const PORT = Number(process.env.PORT) || Number(config.port) || 5000;
+console.log('config.port is', config.port, 'process.env.PORT is', process.env.PORT);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-}); 
+});

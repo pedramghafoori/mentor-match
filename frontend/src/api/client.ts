@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 const client = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  // In dev mode CRA rewrites `/api` to the proxy target (frontend/package.json).
+  // In production the built assets are usually served by the same host,
+  // so a relative path still works.
+  baseURL: '/api',
   withCredentials: true,
 });
 
