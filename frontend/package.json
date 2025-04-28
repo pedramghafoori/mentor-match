@@ -14,6 +14,7 @@
     "@types/react-dom": "^19.1.2",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.9.0",
+    "firebase": "^11.6.1",
     "react": "^19.1.0",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^19.1.0",
@@ -30,10 +31,21 @@
   },
   "proxy": "http://localhost:5500",
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

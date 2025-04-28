@@ -1,0 +1,12 @@
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /profilePictures/{userId} {
+      // Anyone can view a profile photo
+      allow read: if true;
+
+      // Only the owner (authenticated) can upload/replace
+      allow write: if request.auth != null
+                   && request.auth.uid == userId;
+    }
+  }
+}
