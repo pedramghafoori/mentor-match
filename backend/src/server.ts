@@ -5,6 +5,9 @@ import { authRoutes } from './routes/auth.routes';
 import { mentorRoutes } from './routes/mentor.routes';
 import { bookingRoutes } from './routes/booking.routes';
 import { reviewRoutes } from './routes/review.routes';
+import dotenv from 'dotenv';
+dotenv.config();
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
 const app = express();
 

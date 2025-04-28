@@ -17,6 +17,9 @@ CREATE TABLE IF NOT EXISTS user_profiles (
   user_id UUID REFERENCES users(id) ON DELETE CASCADE,
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
+  phone VARCHAR(20),
+  lss_id VARCHAR(100),
+  heard_about VARCHAR(255),
   city VARCHAR(100) NOT NULL,
   profile_picture VARCHAR(255),
   bio TEXT,
@@ -35,6 +38,10 @@ CREATE TABLE IF NOT EXISTS mentor_profiles (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Extra mentor status flag
+ALTER TABLE mentor_profiles
+  ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT false;
 
 -- Bookings table
 CREATE TABLE IF NOT EXISTS bookings (
@@ -72,9 +79,25 @@ CREATE TABLE IF NOT EXISTS certifications (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Skills master list
+CREATE TABLE IF NOT EXISTS skills (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name TEXT UNIQUE NOT NULL
+);
+
+-- Mentor-to-skills many‑to‑many
+CREATE TABLE IF NOT EXISTS mentor_skills (
+  mentor_id UUID REFERENCES mentor_profiles(id) ON DELETE CASCADE,
+  skill_id  UUID REFERENCES skills(id) ON DELETE CASCADE,
+  PRIMARY KEY (mentor_id, skill_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_skills_name ON skills(name);
+
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_user_profiles_user_id ON user_profiles(user_id);
+CREATE INDEX IF NOT EXISTS idx_user_profiles_lss_id ON user_profiles(lss_id);
 CREATE INDEX IF NOT EXISTS idx_mentor_profiles_user_id ON mentor_profiles(user_id);
 CREATE INDEX IF NOT EXISTS idx_mentor_profiles_lss_id ON mentor_profiles(lss_id);
 CREATE INDEX IF NOT EXISTS idx_bookings_mentor_id ON bookings(mentor_id);
@@ -121,4 +144,4 @@ CREATE TRIGGER update_reviews_updated_at
 CREATE TRIGGER update_certifications_updated_at
   BEFORE UPDATE ON certifications
   FOR EACH ROW
-  EXECUTE FUNCTION update_updated_at_column(); 
+  EXECUTE FUNCTION update_updated_at_column();

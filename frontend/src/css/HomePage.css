@@ -1,175 +1,230 @@
-/** Airbnb-inspired HomePage.css **/
-body {
-  margin: 0;
-  font-family: 'Inter', 'Arial', sans-serif;
-  background: #f7f7f7;
-  color: #222;
-}
+/* ---------- HomePage hero split ---------- */
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 3rem 1rem 3rem;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  border-bottom: 1px solid #eee;
-}
 
-.logo {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #ff385c;
-  letter-spacing: -1px;
-  font-family: 'Inter', 'Arial', sans-serif;
-}
 
-.navbar nav {
-  display: flex;
-  gap: 2rem;
-}
 
-.navbar nav a {
-  text-decoration: none;
-  color: #222;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: color 0.2s;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-}
 
-.navbar nav a:hover {
-  background: #f7f7f7;
-  color: #ff385c;
-}
 
-.hero {
-  background: #fff;
-  border-radius: 24px;
-  margin: 2.5rem auto 2rem auto;
-  padding: 3rem 2rem 2.5rem 2rem;
-  max-width: 900px;
-  text-align: center;
-  box-shadow: 0 4px 32px rgba(34,34,34,0.08);
-  border: 1px solid #f0f0f0;
-}
-
-.hero h1 {
-  font-size: 2.7rem;
-  font-weight: 800;
-  margin-bottom: 1.2rem;
-  color: #222;
-  letter-spacing: -1px;
-}
-
-.hero p {
-  color: #717171;
-  font-size: 1.2rem;
-  margin-bottom: 2.2rem;
-}
-
-.cta-btn {
-  background: #ff385c;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 1rem 2.5rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(255,56,92,0.10);
-}
-
-.cta-btn:hover {
-  background: #e31c5f;
-  box-shadow: 0 4px 16px rgba(255,56,92,0.15);
-}
-
-.featured {
-  max-width: 1200px;
-  margin: 2.5rem auto;
-  padding: 0 2rem;
-}
-
-.featured h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: #222;
-}
-
-.mentor-cards {
-  display: flex;
-  gap: 2.5rem;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-.mentor-card {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 6px 24px rgba(34,34,34,0.13), 0 1.5px 4px rgba(34,34,34,0.07);
-  padding: 1.5rem 1.5rem 1.2rem 1.5rem;
-  min-width: 220px;
-  max-width: 260px;
-  flex: 1 1 220px;
+/* Vertical search form layout */
+.search-form-vertical {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
-  border: 1px solid #f0f0f0;
-  transition: box-shadow 0.2s, transform 0.2s;
+  gap: 1.1rem;
+}
+
+.search-form-vertical fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-form-vertical label,
+.search-form-vertical legend {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.location-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.city-select {
+  flex: 1;
+  padding: 0.55rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.locate-btn {
+  background: none;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.locate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.locate-btn:hover:not(:disabled) {
+  background: #f2f2f2;
+}
+
+/* Simple locator icon (SVG or CSS) */
+.locator-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: url('data:image/svg+xml;utf8,<svg fill="gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.07-7.07l-1.41 1.41M6.34 17.66l-1.41 1.41m12.02 0l-1.41-1.41M6.34 6.34L4.93 4.93" stroke="gray" stroke-width="2" fill="none"/></svg>') no-repeat center/contain;
+}
+
+.search-form {
+  /* removed grid for vertical layout */
+}
+
+.search-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.78rem;
+  gap: 0.35rem;
+}
+
+.search-form input,
+.search-form select {
+  padding: 0.55rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.search-form button {
+  grid-column: 1 / -1;
+  margin-top: 0.3rem;
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #c52f52, #e14454);
+  color: #fff;
+  font-weight: 600;
   cursor: pointer;
 }
-
-.mentor-card:hover {
-  box-shadow: 0 12px 32px rgba(255,56,92,0.18), 0 2px 8px rgba(34,34,34,0.10);
-  transform: translateY(-4px) scale(1.025);
-  border-color: #ff385c22;
+/* ---------- HomePage hero split ---------- */
+.home-hero-wrapper {
+  position: relative;          /* ⬅ allows absolute-pos card */
+  max-width: 1280px;
+  margin: 2.5rem auto;
+  display: flex;
+  justify-content: flex-end;   /* shove image to the right */
+  padding: 0 1rem;
 }
 
-.mentor-card img {
+/* big hero image on the right */
+.hero-image {
+  flex: 0 1 75%;
+}
+
+.hero-image img {
   width: 100%;
-  border-radius: 12px;
-  margin-top: 0.5rem;
-  background: #f0f0f0;
+  height: auto;
+  border-radius: 20px;
   object-fit: cover;
-  aspect-ratio: 1/1;
+  object-position: center;
 }
 
-.mentor-card h3 {
-  margin: 1rem 0 0.5rem 0;
-  font-size: 1.15rem;
+/* floating card that overlaps image */
+.search-card {
+  position: absolute;
+  top: 50%;            /* vertically centre */
+  left: 1%;            /* overlap into the image */
+  transform: translateY(-50%);
+  width: 330px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  /* trim padding to shrink the card's vertical height */
+  padding: 1.6rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;       /* tighter spacing between rows */
+  z-index: 2;
+}
+
+/* keep the rest of the card / form rules you already have */
+
+/* ---- pill‑style multi‑select buttons ---- */
+.radio-pills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* exactly two buttons per row */
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.radio-pill input {
+  display: none;                 /* hide native checkbox */
+}
+
+/* stretch each label to full column width */
+.radio-pill {
+  width: 100%;
+}
+
+.radio-pill span {
+  display: inline-block;
+  padding: 0.55rem 0.5rem;
+  border: 1px solid #adafb0;     /* outline button style */
+  border-radius: 8px;
+  background: transparent;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  font-size: 0.9rem;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  outline: none; /* remove default */
+}
+
+.radio-pill span:hover {
+  background: rgba(108, 117, 125, 0.1);
+}
+
+/* focus ring same grey as text/border */
+.radio-pill input:focus + span {
+  box-shadow: 0 0 0 2px #6c757d;
+}
+
+/* selected (checkbox checked) */
+.radio-pill input:checked + span {
+  border-color: #96a4b1;         /* keep grey outline */
+  background: rgba(230, 57, 70, 0.08);
+  color: #e63946;
+}
+
+.search-section-header {
+  font-size: 1.13rem;
   font-weight: 700;
+  margin-bottom: 0.1rem;
   color: #222;
+  letter-spacing: -0.01em;
 }
 
-.mentor-card p {
-  margin: 0 0 0.5rem 0;
-  color: #717171;
-  font-size: 1rem;
+/* Add space above Streams header */
+.search-form-vertical fieldset .search-section-header {
+  margin-top: 0.7rem;
 }
 
-.mentor-card div {
-  color: #ff385c;
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
-  letter-spacing: 1px;
+/* Reduce space above Location header */
+.location-label .search-section-header {
+  margin-top: rem;
 }
 
-@media (max-width: 900px) {
-  .mentor-cards {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.5rem 1rem 1rem 1rem;
-  }
-  .featured {
-    padding: 0 0.5rem;
-  }
-} 
+.search-form-vertical fieldset legend {
+  font-size: 1.13rem;
+  font-weight: 700;
+  margin-bottom: 0.1rem;
+  color: #222;
+  letter-spacing: -0.01em;
+}
+
+/* Target icon for location */
+.target-icon {
+  display: inline-block;
+  width: 20px;
+  height:20px;
+  background: url('data:image/svg+xml;utf8,<svg fill="none" stroke="gray" stroke-width="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>') no-repeat center/contain;
+}
+
+.location-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}

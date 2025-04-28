@@ -46,14 +46,17 @@ export class UserModel {
     lastName: string,
     city: string,
     profilePicture?: string,
-    bio?: string
+    bio?: string,
+    phone?: string,
+    lssId?: string,
+    heardAbout?: string
   ): Promise<UserProfile> {
     const result = await query(
       `INSERT INTO user_profiles 
-       (user_id, first_name, last_name, city, profile_picture, bio) 
-       VALUES ($1, $2, $3, $4, $5, $6) 
+       (user_id, first_name, last_name, city, profile_picture, bio, phone, lss_id, heard_about) 
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
        RETURNING *`,
-      [userId, firstName, lastName, city, profilePicture, bio]
+      [userId, firstName, lastName, city, profilePicture, bio, phone, lssId, heardAbout]
     );
     return result.rows[0];
   }

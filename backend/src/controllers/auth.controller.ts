@@ -24,7 +24,7 @@ function signToken(userId: string, email: string) {
 
 /** POST /api/auth/signup  – create a new account */
 async function signup(req: Request, res: Response) {
-  const { email, password, role = 'mentee' } = req.body;
+  const { email, password, role = 'mentee', firstName, lastName, phone, lssId, heardAbout, city = 'Toronto' } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
@@ -34,12 +34,25 @@ async function signup(req: Request, res: Response) {
     /* duplicate check */
     const existing = await UserModel.findUserByEmail(email);
     if (existing) {
-      return res.status(409).json({ message: 'Email already in use' });
+      return res.status(409).json({ message: 'A user with this email already exists. Please log in or use a different email.' });
     }
 
     /* hash + store */
     const hashed = await bcrypt.hash(password, SALT_ROUNDS);
     const user = await UserModel.createUser(email, hashed, role);
+
+    // Create user profile with extra fields
+    await UserModel.createUserProfile(
+      user.id,
+      firstName || '',
+      lastName || '',
+      city,
+      undefined, // profilePicture
+      undefined, // bio
+      phone || '',
+      lssId || '',
+      heardAbout || ''
+    );
 
     const token = signToken(user.id, user.email);
     delete (user as any).password;          // never send the hash back

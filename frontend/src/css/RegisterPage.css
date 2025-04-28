@@ -1,0 +1,96 @@
+/---------- RegisterPage.css ---------- */
+.auth-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .auth-form label {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="tel"],
+.auth-form input[type="password"] {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.auth-form button {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #e63946;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  
+  .auth-form button:hover {
+    filter: brightness(110%);
+  }
+  
+  .error {
+    color: #c00;
+    margin-bottom: 0.5rem;
+  }
+
+/* ---- pill‑style multi‑select buttons ---- */
+.radio-pills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* exactly two buttons per row */
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.radio-pill input {
+  display: none;                 /* hide native checkbox */
+}
+
+/* stretch each label to full column width */
+.radio-pill {
+  width: 100%;
+}
+
+.radio-pill span {
+  display: inline-block;
+  padding: 0.55rem 0.5rem;
+  border: 1px solid #adafb0;     /* outline button style */
+  border-radius: 8px;
+  background: transparent;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  font-size: 0.9rem;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  outline: none; /* remove default */
+}
+
+.radio-pill span:hover {
+  background: rgba(108, 117, 125, 0.1);
+}
+
+/* focus ring same grey as text/border */
+.radio-pill input:focus + span {
+  box-shadow: 0 0 0 2px #6c757d;
+}
+
+/* selected (checkbox checked) */
+.radio-pill input:checked + span {
+  border-color: #96a4b1;         /* keep grey outline */
+  background: rgba(230, 57, 70, 0.08);
+  color: #e63946;
+}

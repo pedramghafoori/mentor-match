@@ -5,6 +5,7 @@ const router = Router();
 
 // Auth routes
 router.post('/signup', authController.signup);
+router.post('/register', authController.signup); // alias for frontend
 router.post('/login', authController.login);
 router.post('/logout', authController.logout);
 router.get('/me', authController.getCurrentUser);
